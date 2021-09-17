@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://kit.fontawesome.com/e20c6703ff.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+</head>
+<style>
+    form {
+        margin: 50px;
+    }
+    input {
+        outline: none;
+    }
+
+    input[type=search] {
+        -webkit-appearance: textfield;
+        -webkit-box-sizing: content-box;
+        font-family: inherit;
+        font-size: 100%;
+    }
+    input::-webkit-search-decoration,
+    input::-webkit-search-cancel-button {
+        display: none;
+    }
+    input[type=search] {
+        padding: 9px 10px 9px 32px;
+        width: 100px;
+        background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+        border: solid 1px #ccc;
+
+        -webkit-border-radius: 10em;
+        -moz-border-radius: 10em;
+        border-radius: 10em;
+
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        transition: all .5s;
+    }
+    input[type=search]:focus {
+        width: 130px;
+        background-color: #fff;
+        border-color: #66CC75;
+
+        -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+        -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+        box-shadow: 0 0 5px rgba(109,207,246,.5);
+    }
+    .material-icons-outlined {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;  /* Preferred icon size */
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+
+        /* Support for all WebKit browsers. */
+        -webkit-font-smoothing: antialiased;
+        /* Support for Safari and Chrome. */
+        text-rendering: optimizeLegibility;
+
+        /* Support for Firefox. */
+        -moz-osx-font-smoothing: grayscale;
+
+        /* Support for IE. */
+        font-feature-settings: 'liga';
+    }
+</style>
+<body>
+<!--<h1> Welcome to our Econnect blog</h1>-->
+<!--<div>-->
+<!--    <form th:action="@{/searchBar}" method="post">-->
+<!--        <input type="search" placeholder="Search" name="keyword" th:value="${keyword}">-->
+<!--        <input type="submit" value="Search"/>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;content body&ndash;&gt;-->
+
+
+<!--<table class="table table-success table-striped table-borderless table-hover" >-->
+<!--    <tbody>-->
+<!--    <tr th:each="topic :${topicList}">-->
+<!--        <td><a th:href="@{/viewCommentsController/{id}(id=${topic.id})}" th:text="${topic.topicTitle}"></a></td>-->
+<!--        <td th:text="${topic.dateCreated}"></td>-->
+<!--        <td th:text="${topic.timeCreated}"></td>-->
+<!--        &lt;!&ndash;        <td><a th:href="@{/deleteTopic/{id}(id=${topic.id})}" class="btn btn-danger">Delete</a></td>&ndash;&gt;-->
+
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+
+
+
+<header>
+    <!--NavBar Section-->
+    <div class="navbar">
+        <nav class="navigation hide" id="navigation">
+            <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="forums.html">Forums</a></li>
+                <li class="nav-item"><a href="posts.html">Posts</a></li>
+                <li class="nav-item"><a href="detail.html">Detail</a></li>
+            </ul>
+        </nav>
+        <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
+        <div class="brand">My Forum</div>
+        <div>
+            <a th:href="@{/userHomePage.html}"><i class="fas fa-home"></i></a>
+            <a th:href="@{/logOut}"> <i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </div>
+    <!--SearchBox Section-->
+    <div class="search-box">
+        <div>
+            <select name="" id="">
+                <option value="Everything">Everything</option>
+                <option value="Titles">Titles</option>
+                <option value="Descriptions">Descriptions</option>
+            </select>
+            <form th:action="@{/searchBar}" method="post">
+                <input type="search" placeholder="" name="keyword" th:value="${keyword}">
+                <input type="submit" value="Search"/>
+            </form>
+        </div>
+    </div>
+</header>
+<!--content body-->
+<div class="container">
+    <div class="subforum" >
+        <div class="subforum-title">
+            <h1>General Information</h1>
+        </div>
+        <div class="subforum-row" th:each="topic : ${topicList}">
+            <div class="subforum-icon subforum-column center">
+                <i class="fa fa-car center"></i>
+            </div>
+            <div class="subforum-description subforum-column">
+                <h4><a th:href="@{/viewCommentsController/{id}(id=${topic.id})}" th:text="${topic.topicTitle}"></a></h4>
+                <p>Description Content: let's try to be cool, otherwise,w at 'sthe point in libing together with people youdont' live.</p>
+            </div>
+<!--            <div class="subforum-stats subforum-column center">-->
+<!--                <td><a th:href="@{/deleteTopic/{id}(id=${topic.id})}" class="btn btn-danger">Delete</a></td>-->
+<!--            </div>-->
+            <div class="subforum-info subforum-column">
+                <b><a href="">created </a></b>
+                <br>on <small th:text="${topic.dateCreated}"></small>
+                <br>at <small th:text="${topic.timeCreated}"></small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="forum-info">
+    <div class="chart">
+        MyForum - Stats &nbsp;<i class="fa fa-bar-chart"></i>
+    </div>
+    <span><u>5,369</u> Posts in <u>48</u> Topics by <u>8,124</u> Members.</span><br>
+    <span>Latest post: <b><a href="">Random post</a></b> on Dec 15 2021 By <a href="">RandomUser</a></span>.<br>
+    <span>Check <a href="">the latest posts</a> .</span><br>
+</div>
+
+<footer>
+    <span> All Rights Reserved</span>
+</footer>
+
+
+</body>
+</body>
+</html>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/e20c6703ff.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+</head>
+<style>
+
+    /* ########################################### */
+    /*                 Global                      */
+    /* ########################################### */
+    *{
+        box-sizing: border-box;
+    }
+
+    html{
+        font-size: 14px;
+        font-family: 'Titillium Web', sans-serif;
+        background-color:rgb(0,0,0);
+        color:#FEFEFE;
+    }
+
+    a{
+        color:#FF0042;
+        font-weight: bolder;
+        text-decoration: none;
+    }
+
+    h1{
+        font-size:16px;
+        font-weight: bolder;
+    }
+
+
+    /* ########################################### */
+    /*           Forums.html                       */
+    /* ########################################### */
+    .container{
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .subforum{
+        margin-top:20px;
+    }
+
+    .subforum-title{
+        background-color:#292B2E;
+        padding: 5px;
+        border-radius: 5px;
+        margin:4px;
+    }
+
+    .subforum-row{
+        display: grid;
+        grid-template-columns: 7% 60% 13% 20%;
+    }
+
+    .subforum-column{
+        padding: 10px;
+        margin:4px;
+        border-radius: 5px;
+        background-color:#111314;
+    }
+
+    .subforum-description *{
+        margin-block: 0;
+    }
+
+    .center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .subforum-icon i{
+        font-size: 45px;
+    }
+
+    .subforum-devider{
+        display: none;
+    }
+
+
+    /* For the smartphones */
+    @media screen and (max-width: 460px) {
+        .container{
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .subforum-row{
+            display: grid;
+            grid-template-columns: 25% 75%;
+            grid-template-rows: 65% 35%;
+        }
+
+        .subforum-devider{
+            display: block;
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(190, 190, 190, 0), rgba(255, 255, 255, 0.75), rgba(190, 190, 190, 0));
+        }
+
+
+
+    }
+
+    /* For the tablets */
+    @media screen and (min-width: 460px) and (max-width: 1024px) {
+        .container{
+            margin: 15px;
+            padding: 15px;
+        }
+
+        .subforum-row{
+            display: grid;
+            grid-template-columns: 10% 60% 10% 20%;
+        }
+
+        .subforum-icon i{
+            font-size: 35px;
+        }
+
+        html{
+            font-size: 14px;
+        }
+
+        h1{
+            font-size: 16px;
+        }
+
+    }
+    /*   Header Section    */
+
+    header{
+        margin-inline: 10px;
+    }
+    /* Nav Bar styles */
+    .navbar{
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .navigation{
+        background-color:#52057b;
+        padding: 10px;
+        width: 65%;
+        display: inline-block;
+        border-radius: 5px;
+        max-height: 80px;
+        margin-right:10px;
+    }
+
+    .close-icon i{
+        font-size:60px;
+        float: left;
+        cursor: pointer;
+    }
+
+    .nav-list{
+        list-style-type:none;
+        overflow: hidden;
+    }
+
+    .nav-item a{
+        float: right;
+        display:block;
+        text-align: center;
+        margin-inline: 20px;
+        font-size: 20px;
+        padding: 10px;
+        color:#fff;
+    }
+
+    .nav-item a:hover{
+        background-color: rgb(0,0,0,0.1);
+    }
+
+    .hide{
+        display: none;
+    }
+
+    .bar-icon{
+        font-size: 60px;
+        display: inline-block;
+        margin-right:10px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    @font-face {
+        font-family:aquire;
+        src:url(aquire.otf);
+    }
+
+    .brand{
+        font-size:60px;
+        display: inline-block;
+        font-family:aquire;
+    }
+
+    /*Navbar for the smartphones*/
+    @media screen and (max-width: 460px){
+        .navigation{
+            max-height: auto;
+        }
+
+        .close-icon i{
+            font-size:30px;
+        }
+
+        .nav-item a{
+            float:left;
+            display:inline;
+            margin-inline: 3px;
+            font-size: 10px;
+            padding: 5px;
+        }
+
+
+        .bar-icon{
+            font-size: 30px;
+        }
+
+        .brand{
+            font-size:20px;
+        }
+    }
+
+    /* Search Box styles */
+    .search-box{
+        border: solid 1px #52057b;
+        margin-top: 20px;
+        padding: 40px;
+        display:flex;
+        justify-content: center;
+        box-shadow:1px 2px 3px #52057b;
+    }
+
+    .search-box select{
+        padding: 10px;
+    }
+
+    .search-box input{
+        padding: 10px;
+    }
+
+    .search-box button{
+        padding: 10px;
+        background-color:#fff;
+        color:#000000;
+    }
+
+    .search-box button:hover{
+        background-color: #000000;
+        color: #fff;
+        box-shadow: 1px 2px 3px #fff;
+    }
+
+    /* search box for smrtphones */
+    @media screen and (max-width: 460px){
+        .search-box input, .search-box button, .search-box select{
+            min-width: 300px;
+            margin-top: 5px;
+        }
+
+    }
+
+    /* forum info Styling */
+    .forum-info{
+        padding: 20px;
+        background-color: #111314;
+    }
+
+    .chart{
+        font-size:20px;
+        font-weight:bold;
+    }
+    /* Footer Styling */
+
+    footer{
+        margin-top: 20px;
+        padding: 20px;
+        background-color:  #52057b;
+        display: block;
+        text-align: center;
+    }
+
+    /* ########################################### */
+    /*            posts.html                       */
+    /* ########################################### */
+
+    /* posts table's head  */
+    .table-head{
+        display: flex;
+    }
+
+    .table-head div{
+        padding: 5px;
+        margin: 2px;
+        background-color: #2C2C2C;
+        font-weight: bold;
+    }
+
+    .table-head .status{
+        flex: 5%;
+    }
+
+    .table-head .subjects{
+        flex: 70%;
+    }
+
+    .table-head .replies{
+        flex: 10%;
+    }
+
+    .table-head .last-reply{
+        flex: 15%;
+    }
+
+    /* posts table's body  */
+
+    .table-row{
+        display: flex;
+    }
+
+    .table-row .status, .table-row .subjects, .table-row .replies, .table-row .last-reply{
+        padding: 5px;
+        margin: 2px;
+        background-color: #131415;
+    }
+
+    .table-row .status{
+        flex: 5%;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .table-row .subjects{
+        flex: 70%;
+    }
+
+    .table-row .replies{
+        flex: 10%;
+    }
+
+    .table-row .last-reply{
+        flex: 15%;
+    }
+
+    /* navigation path*/
+    .navigate{
+        margin-block: 20px;
+        font-weight: lighter;
+        font-size: 24px;
+    }
+
+    .navigate a{
+        color: #fff;
+    }
+
+    .navigate a:hover{
+        color:#FF0042;
+        font-weight: bolder;
+    }
+
+    /* Pagination*/
+
+    .pagination{
+        padding: 20px;
+        font-size: 15px;
+    }
+
+    .pagination a{
+        color: #fff;
+        margin-inline: 5px;
+        padding: 5px 10px;
+        border: solid 0.5px #fff;
+    }
+
+    .pagination a:hover{
+        opacity: 0.5;
+    }
+
+    .note{
+        background-color:#111314;
+        padding: 20px;
+        display: block;
+    }
+
+    .note span{
+        font-size: 20px;
+        margin-block: 5px;
+    }
+
+
+    /* ########################################### */
+    /*            detail.html                      */
+    /* ########################################### */
+
+    .head{
+        display: flex;
+        background-color: #2C2C2C;
+        padding: 5px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    .authors{
+        flex: 20%;
+    }
+
+    .content{
+        flex: 80%;
+    }
+
+    .body{
+        display: flex;
+        background-color: #131415;
+        padding: 10px;
+        margin-top: 5px;
+    }
+
+    .body .authors .username{
+        font-size: 20px;
+    }
+
+    .body .authors img{
+        max-width: 50px;
+        max-height: 80px;
+    }
+
+    .body .content .comment button{
+        border:none;
+        padding:10px;
+        font-weight: bolder;
+        box-shadow: 4px 6px #fff;
+        cursor: pointer;
+        float: right;
+    }
+
+    /* comment section */
+    .comment-area{
+        margin-bottom:50px;
+    }
+
+    .comment-area textarea{
+        width: 100%;
+        min-height: 100px;
+        padding: 10px;
+        margin-block: 10px;
+    }
+
+    .comment-area input{
+        float: right;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .comment-area input:hover{
+        border: solid 1px #000000;
+    }
+
+    .fa-sign-out-alt{
+        color: red;
+        font-size: x-large;
+    }
+    .fa-home{
+        color: darkgray;
+        font-size: x-large;
+    }
+    form {
+        margin: 50px;
+    }
+    input {
+        outline: none;
+    }
+
+    input[type=search] {
+        -webkit-appearance: textfield;
+        -webkit-box-sizing: content-box;
+        font-family: inherit;
+        font-size: 100%;
+    }
+    input::-webkit-search-decoration,
+    input::-webkit-search-cancel-button {
+        display: none;
+    }
+    input[type=search] {
+        padding: 9px 10px 9px 32px;
+        width: 100px;
+        background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+        border: solid 1px #ccc;
+
+        -webkit-border-radius: 10em;
+        -moz-border-radius: 10em;
+        border-radius: 10em;
+
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        transition: all .5s;
+    }
+    input[type=search]:focus {
+        width: 130px;
+        background-color: #fff;
+        border-color: #66CC75;
+
+        -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+        -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+        box-shadow: 0 0 5px rgba(109,207,246,.5);
+    }
+    .material-icons-outlined {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;  /* Preferred icon size */
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+
+        /* Support for all WebKit browsers. */
+        -webkit-font-smoothing: antialiased;
+        /* Support for Safari and Chrome. */
+        text-rendering: optimizeLegibility;
+
+        /* Support for Firefox. */
+        -moz-osx-font-smoothing: grayscale;
+
+        /* Support for IE. */
+        font-feature-settings: 'liga';
+    }
+
+
+</style>
+<body>
+<!--<a th:href="@{/displayCommentsForAdmin}">Post your comment</a>-->
+<!--<form th:action="@{/postNewComment}" method="get" th:object="${Body}">-->
+<!--    <textarea  style="width: 20%; height: 10vh;"name="commentBody"  placeholder="post your comment"></textarea>-->
+<!--    <input type="submit" value="Post">-->
+<!--</form>-->
+
+
+<!--<table class="table table-success table-striped table-borderless table-hover" >-->
+<!--    <tbody>-->
+<!--    <tr th:each="comment :${comments}">-->
+<!--        <td><a th:text="${comment.commentBody}"></a></td>-->
+<!--        <td th:text="${comment.person.username}"></td>-->
+<!--        <td th:text="${comment.localDate}"></td>-->
+<!--        &lt;!&ndash;        <td><a th:href="@{/deleteTopic/{id}(id=${topic.id})}" class="btn btn-danger">Delete</a></td>&ndash;&gt;-->
+
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+
+<!--new one-->
+<script src="main.js">
+    function showComment(){
+        var commentArea = document.getElementById("comment-area");
+        commentArea.classList.remove("hide");
+    }
+</script>
+
+
+
+<header>
+    <!--NavBar Section-->
+    <div class="navbar">
+        <nav class="navigation hide" id="navigation">
+            <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="forums.html">Forums</a></li>
+                <li class="nav-item"><a href="posts.html">Posts</a></li>
+                <li class="nav-item"><a href="detail.html">Detail</a></li>
+            </ul>
+        </nav>
+        <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
+        <div class="brand">My Forum</div>
+
+            <div>
+                <a th:href="@{/}"><i class="fas fa-home"></i></a>
+                <a th:href="@{/logOut}"> <i class="fas fa-sign-out-alt"></i></a>
+            </div>
+
+    </div>
+    <!--SearchBox Section-->
+    <div class="search-box">
+        <div>
+            <select name="" id="">
+                <option value="Everything">Everything</option>
+                <option value="Titles">Titles</option>
+                <option value="Descriptions">Descriptions</option>
+            </select>
+            <form th:action="@{/searchBar}" method="post">
+                <input type="search" placeholder="" name="keyword" th:value="${keyword}">
+                <input type="submit" value="Search"/>
+            </form>
+        </div>
+    </div>
+    <!--Comment Area-->
+    <div >
+        <form class="comment-area " id="comment-area" th:action="@{/postNewComment}" method="get" th:object="${Body}">
+            <textarea name="commentBody" id="" placeholder="comment here ... "></textarea>
+            <input type="submit" value="submit">
+        </form>
+
+    </div>
+    <div class="container">
+        <!--Navigation-->
+        <div class="navigate">
+            <span><a href="">MyForum - Forums</a> >> <a href="">random subforum</a> >> <a href="">random topic</a></span>
+        </div>
+
+        <!--Topic Section-->
+        <div class="topic-container">
+            <!--Original thread-->
+            <div class="head">
+                <div class="authors" >Author</div>
+                <div class="content">Topic:<span  style="font-size: 20px" th:text="${topic.topicTitle}"></span></div>
+            </div>
+
+            <div class="body" th:each="comment :${comments}">
+                <div class="authors">
+                    <div class="username"><a href="" th:text="${comment.person.username}">Username</a></div>
+                    <div th:text="${comment.person.userType}">Role</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Post on: <u th:text="${comment.localDate}">45</u></div>
+                    <div>At: <u th:text="${comment.localTime}">4586</u></div>
+                </div>
+                <div class="content">
+                    <h3 th:text="${comment.commentBody}"></h3>
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <span>&copy;   All Rights Reserved</span>
+    </footer>
+
+
+
+
+</div>
+</body>
+</html>

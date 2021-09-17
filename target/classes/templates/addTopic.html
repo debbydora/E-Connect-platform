@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e20c6703ff.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+</head>
+<style>
+    form {
+        margin: 50px;
+    }
+    input {
+        outline: none;
+    }
+
+    input[type=search] {
+        -webkit-appearance: textfield;
+        -webkit-box-sizing: content-box;
+        font-family: inherit;
+        font-size: 100%;
+    }
+    input::-webkit-search-decoration,
+    input::-webkit-search-cancel-button {
+        display: none;
+    }
+    input[type=search] {
+        padding: 9px 10px 9px 32px;
+        width: 100px;
+        background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+        border: solid 1px #ccc;
+
+        -webkit-border-radius: 10em;
+        -moz-border-radius: 10em;
+        border-radius: 10em;
+
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        transition: all .5s;
+    }
+    input[type=search]:focus {
+        width: 130px;
+        background-color: #fff;
+        border-color: #66CC75;
+
+        -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+        -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+        box-shadow: 0 0 5px rgba(109,207,246,.5);
+    }
+    .material-icons-outlined {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;  /* Preferred icon size */
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+
+        /* Support for all WebKit browsers. */
+        -webkit-font-smoothing: antialiased;
+        /* Support for Safari and Chrome. */
+        text-rendering: optimizeLegibility;
+
+        /* Support for Firefox. */
+        -moz-osx-font-smoothing: grayscale;
+
+        /* Support for IE. */
+        font-feature-settings: 'liga';
+    }
+</style>
+<body>
+<div class="navbar">
+    <nav class="navigation hide" id="navigation">
+        <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="forums.html">Forums</a></li>
+            <li class="nav-item"><a href="posts.html">Posts</a></li>
+            <li class="nav-item"><a href="detail.html">Detail</a></li>
+        </ul>
+    </nav>
+    <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
+    <div class="brand">My Forum</div>
+    <div>
+        <div>
+            <a th:href="@{/adminHomePage.html}"><i class="fas fa-home"></i></a>
+            <a th:href="@{/logOut}"> <i class="fas fa-sign-out-alt"></i></a>
+        </div>
+
+    </div>
+
+
+</div>
+<!--SearchBox Section-->
+<div class="search-box">
+    <div>
+        <select name="" id="">
+            <option value="Everything">Everything</option>
+            <option value="Titles">Titles</option>
+            <option value="Descriptions">Descriptions</option>
+        </select>
+        <form th:action="@{/searchBar}" method="post">
+            <input type="search" placeholder="" name="keyword" th:value="${keyword}">
+            <input type="submit" value="Search"/>
+        </form>
+    </div>
+</div>
+
+
+<form method="post" th:action="@{/addNewTopic}" th:object="${category}">
+    <input name="topicTitle" type="text" placeholder="New topic"/>
+    <div class="form-group">
+    <label>Category</label>
+    <select class="form-select" id="topicCategory" name="topicCategory">
+        <option  th:each="topicCategories:${T(com.example.group6project.enums.TopicCategory).values()}"
+                 th:value="${topicCategories}"
+                 th:text="${topicCategories}">
+
+        </option>
+
+    </select>
+    </div>
+    <input type="submit" value="Add new Topic"/>
+</form>
+</body>
+</html>
